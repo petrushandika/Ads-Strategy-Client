@@ -16,7 +16,7 @@ src/
 ├── assets/                  # Static files (images, fonts, etc.)
 │   ├── images/              # Images
 │   ├── fonts/               # Fonts
-│   └── styles/              # CSS files (if needed)
+│   └── styles/              # Global CSS files (if needed)
 │
 ├── components/              # Shared UI components
 │   ├── atoms/               # Small, reusable UI components
@@ -73,6 +73,15 @@ src/
 │   ├── DashboardLayout.tsx  # Main dashboard layout
 │   └── PageLayout.tsx       # Generic page wrapper
 │
+├── pages/                   # Next.js file-based routing
+│   ├── _app.tsx             # Main application wrapper for Next.js
+│   ├── _document.tsx        # Document customization
+│   ├── index.tsx            # Homepage or landing page
+│   ├── login.tsx            # Login page
+│   ├── signup.tsx           # Signup page
+│   ├── dashboard.tsx        # Dashboard page
+│   └── tasks.tsx            # Tasks listing page
+│
 ├── services/                # Centralized services
 │   ├── authService.ts       # Service for authentication logic
 │   └── notificationService.ts # Service for handling notifications
@@ -95,8 +104,8 @@ src/
 │   ├── stringUtils.ts       # String manipulation utilities
 │   └── validate.ts          # Form validation helpers
 │
-├── App.tsx                  # Main application component
-├── main.tsx                 # Entry point for React app
+├── App.tsx                  # Main application component (if needed for custom logic)
+├── main.tsx                 # Entry point for React app (mostly for customizations)
 └── vite.config.ts           # Vite configuration file
 ```
 
