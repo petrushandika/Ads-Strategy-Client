@@ -4,6 +4,7 @@ import { Poppins } from "next/font/google";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { Sidebar } from "@/components/organisms/Sidebar";
 
 const poppins = Poppins({
@@ -27,11 +28,11 @@ export default function RootLayout({
       <body
         className={twMerge(
           poppins.variable,
-          "bg-white text-[#2C3E50] antialiased font-sans"
+          "bg-white text-[#2C3E50] antialiased font-sans h-screen overflow-hidden"
         )}
       >
         {/* Top Bar */}
-        <header className="flex items-center justify-between px-6 py-4 border-b border-purple-300 bg-white">
+        <header className="flex items-center justify-between px-5 py-3 border-b border-purple-300 bg-white">
           {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="bg-purple-500 text-white font-bold px-2 py-1 rounded text-lg">
@@ -60,6 +61,14 @@ export default function RootLayout({
               />
             </div>
 
+            <div className="relative">
+              <NotificationsNoneIcon
+                className="text-black/70"
+                fontSize="medium"
+              />
+              <span className="absolute top-0 right-0 block w-1.5 h-1.5 bg-purple-500 rounded-full"></span>
+            </div>
+
             {/* Profile */}
             <div className="flex items-center gap-2">
               <div className="flex flex-col justify-center">
@@ -82,9 +91,13 @@ export default function RootLayout({
         </header>
 
         {/* Sidebar + Content */}
-        <div className="flex">
-          <Sidebar />
-          <div className="flex-1 min-h-screen p-6">{children}</div>
+        <div className="flex min-h-screen">
+          <aside className="flex-shrink-0">
+            <Sidebar />
+          </aside>
+          <main className="flex-1 max-h-screen overflow-y-auto p-6">
+            {children}
+          </main>
         </div>
       </body>
     </html>

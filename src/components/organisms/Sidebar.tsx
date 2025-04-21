@@ -36,7 +36,7 @@ const SidebarLink = ({
   <Link
     href={href}
     className={clsx(
-      "flex items-center gap-3 px-4 py-2 rounded-lg transition-all",
+      "flex items-center gap-3 px-3 py-2 rounded-lg transition-all",
       active
         ? "bg-purple-500 text-white"
         : "text-purple-700 hover:bg-purple-100"
@@ -49,12 +49,12 @@ const SidebarLink = ({
 
 export const Sidebar = () => {
   const pathname = usePathname();
-  const [openAds, setOpenAds] = useState(true);
-  const [openSocial, setOpenSocial] = useState(true);
+  const [openAds, setOpenAds] = useState(false);
+  const [openSocial, setOpenSocial] = useState(false);
 
   return (
-    <aside className="w-64 bg-white min-h-screen text-purple-700 border-r border-purple-300 p-4">
-      <div className="flex flex-col h-full justify-between">
+    <aside className="w-64 min-h-screen bg-white text-purple-700 border-r border-purple-300 p-5">
+      <div className="flex flex-col justify-between h-full">
         {/* Navigation */}
         <div className="flex-1 space-y-1 text-sm">
           <SidebarLink
@@ -67,7 +67,7 @@ export const Sidebar = () => {
           {/* Ads Performance */}
           <button
             onClick={() => setOpenAds((prev) => !prev)}
-            className="flex items-center justify-between px-4 py-2 w-full rounded-lg hover:bg-purple-100 transition"
+            className="flex items-center justify-between px-3 py-2 w-full rounded-lg hover:bg-purple-100 transition"
           >
             <div className="flex items-center gap-3">
               <PieChartOutlineRoundedIcon fontSize="small" />
@@ -122,7 +122,7 @@ export const Sidebar = () => {
           {/* Social Media Metrics */}
           <button
             onClick={() => setOpenSocial((prev) => !prev)}
-            className="flex items-center justify-between px-4 py-2 w-full rounded-lg hover:bg-purple-100 transition"
+            className="flex items-center justify-between px-3 py-2 w-full rounded-lg hover:bg-purple-100 transition"
           >
             <div className="flex items-center gap-3">
               <InsightsRoundedIcon fontSize="small" />
@@ -186,7 +186,7 @@ export const Sidebar = () => {
         </div>
 
         {/* Logout */}
-        <div>
+        <div className="mt-auto">
           <SidebarLink
             href="/logout"
             label="Logout"
