@@ -37,9 +37,7 @@ const SidebarLink = ({
     href={href}
     className={clsx(
       "flex items-center gap-3 px-3 py-2 rounded-lg transition-all",
-      active
-        ? "bg-purple-500 text-white"
-        : "text-purple-700 hover:bg-purple-100"
+      active ? "bg-purple-500 text-white" : "text-gray-600 hover:bg-purple-100"
     )}
   >
     {icon}
@@ -53,7 +51,7 @@ export const Sidebar = () => {
   const [openSocial, setOpenSocial] = useState(false);
 
   return (
-    <aside className="w-64 min-h-screen bg-white text-purple-700 border-r border-purple-300 p-5">
+    <aside className="w-64 min-h-screen bg-white text-gray-600 border-r border-purple-300 p-5">
       <div className="flex flex-col justify-between h-full">
         {/* Navigation */}
         <div className="flex-1 space-y-1 text-sm">
@@ -71,7 +69,7 @@ export const Sidebar = () => {
           >
             <div className="flex items-center gap-3">
               <PieChartOutlineRoundedIcon fontSize="small" />
-              <span className="text-sm font-medium text-purple-700">
+              <span className="text-sm font-medium text-gray-600">
                 Ads Performance
               </span>
             </div>
@@ -126,7 +124,7 @@ export const Sidebar = () => {
           >
             <div className="flex items-center gap-3">
               <InsightsRoundedIcon fontSize="small" />
-              <span className="text-sm font-medium text-purple-700">
+              <span className="text-sm font-medium text-gray-600">
                 Social Media Metrics
               </span>
             </div>
