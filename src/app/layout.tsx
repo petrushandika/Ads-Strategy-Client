@@ -14,8 +14,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "My Portfolio",
-  description: "Created with the help of Frontend Tribe",
+  title: "Ads Strategy Systems",
+  description: "",
 };
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
         )}
       >
         {/* Top Bar */}
-        <header className="flex items-center justify-between px-5 py-3 border-b border-purple-300 bg-white">
+        <header className="flex items-center justify-between px-5 py-4 border-b border-purple-300 bg-white">
           {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="bg-purple-500 text-white font-bold px-2 py-1 rounded text-lg">

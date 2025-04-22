@@ -12,6 +12,7 @@ import SwapHorizRoundedIcon from "@mui/icons-material/SwapHorizRounded";
 import PercentRoundedIcon from "@mui/icons-material/PercentRounded";
 import BarChartRoundedIcon from "@mui/icons-material/BarChartRounded";
 import CalendarTodayRoundedIcon from "@mui/icons-material/CalendarTodayRounded";
+import CampaignRoundedIcon from "@mui/icons-material/CampaignRounded";
 import InsightsRoundedIcon from "@mui/icons-material/InsightsRounded";
 import EqualizerRoundedIcon from "@mui/icons-material/EqualizerRounded";
 import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
@@ -47,13 +48,17 @@ const SidebarLink = ({
 
 export const Sidebar = () => {
   const pathname = usePathname();
-  const [openAds, setOpenAds] = useState(false);
-  const [openSocial, setOpenSocial] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<"ads" | "social" | null>(
+    null
+  );
+
+  const toggleDropdown = (menu: "ads" | "social") => {
+    setOpenDropdown((prev) => (prev === menu ? null : menu));
+  };
 
   return (
     <aside className="w-64 min-h-screen bg-white text-gray-600 border-r border-purple-300 p-5">
       <div className="flex flex-col justify-between h-full">
-        {/* Navigation */}
         <div className="flex-1 space-y-1 text-sm">
           <SidebarLink
             href="/dashboard"
@@ -64,7 +69,7 @@ export const Sidebar = () => {
 
           {/* Ads Performance */}
           <button
-            onClick={() => setOpenAds((prev) => !prev)}
+            onClick={() => toggleDropdown("ads")}
             className="flex items-center justify-between px-3 py-2 w-full rounded-lg hover:bg-purple-100 transition"
           >
             <div className="flex items-center gap-3">
@@ -77,11 +82,11 @@ export const Sidebar = () => {
               fontSize="small"
               className={clsx(
                 "transition-transform duration-200",
-                openAds && "rotate-180"
+                openDropdown === "ads" && "rotate-180"
               )}
             />
           </button>
-          {openAds && (
+          {openDropdown === "ads" && (
             <div className="ml-8 space-y-1">
               <SidebarLink
                 href="/ads-performance/click-through-rate"
@@ -90,16 +95,16 @@ export const Sidebar = () => {
                 active={pathname === "/ads-performance/click-through-rate"}
               />
               <SidebarLink
-                href="/ads-performance/engagement-by-channel"
+                href="/ads-performance/conversion-rates"
                 label="Conversion Rates"
                 icon={<SwapHorizRoundedIcon fontSize="small" />}
-                active={pathname === "/ads-performance/engagement-by-channel"}
+                active={pathname === "/ads-performance/conversion-rates"}
               />
               <SidebarLink
-                href="/ads-performance/roas"
+                href="/ads-performance/return-on-ad-spend"
                 label="ROAS"
                 icon={<PercentRoundedIcon fontSize="small" />}
-                active={pathname === "/ads-performance/roas"}
+                active={pathname === "/ads-performance/return-on-ad-spend"}
               />
             </div>
           )}
@@ -110,6 +115,7 @@ export const Sidebar = () => {
             icon={<BarChartRoundedIcon fontSize="small" />}
             active={pathname === "/ads-analytics"}
           />
+
           <SidebarLink
             href="/ads-schedule"
             label="Ads Schedule"
@@ -117,9 +123,16 @@ export const Sidebar = () => {
             active={pathname === "/ads-schedule"}
           />
 
+          <SidebarLink
+            href="/ads-planner"
+            label="Ads Planner"
+            icon={<CampaignRoundedIcon fontSize="small" />}
+            active={pathname === "/ads-planner"}
+          />
+
           {/* Social Media Metrics */}
           <button
-            onClick={() => setOpenSocial((prev) => !prev)}
+            onClick={() => toggleDropdown("social")}
             className="flex items-center justify-between px-3 py-2 w-full rounded-lg hover:bg-purple-100 transition"
           >
             <div className="flex items-center gap-3">
@@ -132,11 +145,11 @@ export const Sidebar = () => {
               fontSize="small"
               className={clsx(
                 "transition-transform duration-200",
-                openSocial && "rotate-180"
+                openDropdown === "social" && "rotate-180"
               )}
             />
           </button>
-          {openSocial && (
+          {openDropdown === "social" && (
             <div className="ml-8 space-y-1">
               <SidebarLink
                 href="/social-media-metrics/platform-performance"
@@ -148,7 +161,7 @@ export const Sidebar = () => {
               />
               <SidebarLink
                 href="/social-media-metrics/engagement-by-channel"
-                label="Engagement Channel"
+                label="Engagement By Channel"
                 icon={<ChatBubbleOutlineRoundedIcon fontSize="small" />}
                 active={
                   pathname === "/social-media-metrics/engagement-by-channel"

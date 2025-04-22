@@ -66,7 +66,7 @@ const AdsMetrics: React.FC = () => {
     {
       title: "CPC",
       value: "Rp 3.500",
-      description: "Avg cost per click",
+      description: "Average cost per click",
       trend: "down",
       percent: "-1.5%",
       icon: <TimelineIcon />,
