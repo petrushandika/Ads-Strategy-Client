@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import DateSelector from "@/components/DateSelector";
-import ToggleView from "@/components/ToggleView";
-import CalendarView from "@/components/CalendarView";
-import AdsFormPanel from "@/components/AdsFormPanel";
+import DateSelector from "@/components/molecules/DateSelector";
+import ToggleView from "@/components/atoms/ToggleView";
+import CalendarView from "@/components/organisms/CalendarView";
+import AdsFormPanel from "@/components/organisms/AdsFormPanel";
 
 const AdsSchedule = () => {
   const today = new Date();

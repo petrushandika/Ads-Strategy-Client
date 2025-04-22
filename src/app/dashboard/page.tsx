@@ -1,15 +1,17 @@
 "use client";
 
 import React from "react";
-import DashboardCard, { DashboardCardProps } from "@/components/DashboardCard";
-import ChartActivity from "@/components/ChartActivity";
+import DashboardCard, {
+  DashboardCardProps,
+} from "@/components/molecules/DashboardCard";
+import ChartActivity from "@/components/organisms/ChartActivity";
 
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import ShowChartIcon from "@mui/icons-material/ShowChart";
 import PercentIcon from "@mui/icons-material/Percent";
-import SidebarCard from "@/components/SidebarCard";
-import AdsMetrics from "@/components/AdsMetrics";
+import SidebarCard from "@/components/molecules/SidebarCard";
+import AdsMetrics from "@/components/organisms/AdsMetrics";
 
 const cardData: DashboardCardProps[] = [
   {

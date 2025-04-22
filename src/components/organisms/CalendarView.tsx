@@ -76,7 +76,7 @@ const CalendarView = ({
                             ${
                               day
                                 ? isToday(day)
-                                  ? "bg-blue-100 font-semibold border-blue-400"
+                                  ? "bg-blue-100 font-semibold border border-blue-400"
                                   : "bg-white border-gray-200"
                                 : "bg-gray-100 border-gray-100"
                             }`}

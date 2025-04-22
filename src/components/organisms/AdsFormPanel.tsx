@@ -128,7 +128,12 @@ const AdsFormPanel = ({
         onChange={(e) => setDescription(e.target.value)}
       />
 
-      <Button variant="contained" color="primary" onClick={handleSubmit}>
+      <Button
+        className="rounded-full text-sm shadow-none hover:shadow-none bg-blue-600"
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+      >
         Save
       </Button>
     </form>
