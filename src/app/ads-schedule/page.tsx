@@ -4,7 +4,7 @@ import { useState } from "react";
 import DateSelector from "@/components/molecules/DateSelector";
 import ToggleView from "@/components/atoms/ToggleView";
 import CalendarView from "@/components/organisms/CalendarView";
-import AdsFormPanel from "@/components/organisms/AdsFormPanel";
+import AdsForm from "@/components/organisms/AdsForm";
 
 const AdsSchedule = () => {
   const today = new Date();
@@ -112,7 +112,7 @@ const AdsSchedule = () => {
         selectedDate={selectedDate}
       />
 
-      <AdsFormPanel
+      <AdsForm
         openPanel={openPanel}
         selectedDate={selectedDate}
         title={title}

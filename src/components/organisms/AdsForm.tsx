@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { ChevronRight } from "@mui/icons-material";
 
-interface AdsFormPanelProps {
+interface AdsFormProps {
   openPanel: boolean;
   selectedDate: Date | null;
   title: string;
@@ -30,7 +30,7 @@ interface AdsFormPanelProps {
   closePanel: () => void;
 }
 
-const AdsFormPanel = ({
+const AdsForm = ({
   openPanel,
   selectedDate,
   title,
@@ -47,7 +47,7 @@ const AdsFormPanel = ({
   setDescription,
   handleSubmit,
   closePanel,
-}: AdsFormPanelProps) => (
+}: AdsFormProps) => (
   <Box
     className="fixed top-0 right-0 w-1/2 h-full bg-white shadow-lg p-5 overflow-y-scroll"
     style={{
@@ -55,10 +55,14 @@ const AdsFormPanel = ({
       transform: openPanel ? "translateX(0)" : "translateX(100%)",
     }}
   >
-    <IconButton onClick={closePanel} className="absolute top-4 right-4">
-      <ChevronRight />
-    </IconButton>
-    <Typography variant="h6">Ad Details</Typography>
+    <div className="flex justify-between items-center w-full">
+      <Typography className="font-semibold text-black text-xl" variant="h6">
+        Ad Details
+      </Typography>
+      <IconButton onClick={closePanel}>
+        <ChevronRight />
+      </IconButton>
+    </div>
     <form className="mt-4" onSubmit={(e) => e.preventDefault()}>
       <TextField
         label="Title"
@@ -140,4 +144,4 @@ const AdsFormPanel = ({
   </Box>
 );
 
-export default AdsFormPanel;
+export default AdsForm;
