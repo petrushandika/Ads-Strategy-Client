@@ -1,24 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Button,
-  TextField,
-  Divider,
-  Checkbox,
-  InputAdornment,
-} from "@mui/material";
+import { Button, TextField, Divider, InputAdornment } from "@mui/material";
 import { Google, Visibility, VisibilityOff } from "@mui/icons-material";
 import { useRouter } from "next/navigation";
 
-interface LoginFormData {
+interface RegisterFormData {
   name: string;
   email: string;
   password: string;
 }
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const router = useRouter();
-  const [formData, setFormData] = useState<LoginFormData>({
+  const [formData, setFormData] = useState<RegisterFormData>({
     name: "",
     email: "",
     password: "",
@@ -27,7 +21,7 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange =
-    (field: keyof LoginFormData) =>
+    (field: keyof RegisterFormData) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setFormData((prev) => ({
         ...prev,
@@ -41,9 +35,9 @@ const LoginForm = () => {
     // Handle form submission logic here
   };
 
-  const handleGoogleSignIn = () => {
-    console.log("Google sign in clicked");
-    // Handle Google sign in logic here
+  const handleGoogleSignUp = () => {
+    console.log("Google sign up clicked");
+    // Handle Google sign up logic here
   };
 
   const handleClickShowPassword = () => {
@@ -52,11 +46,11 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Google Sign In Button */}
+      {/* Google Sign Up Button */}
       <Button
         variant="outlined"
         fullWidth
-        onClick={handleGoogleSignIn}
+        onClick={handleGoogleSignUp}
         startIcon={
           <Google
             sx={{
@@ -78,12 +72,52 @@ const LoginForm = () => {
           },
         }}
       >
-        Sign in with Google
+        Sign up with Google
       </Button>
 
       {/* Divider */}
       <div className="relative pt-2">
         <Divider sx={{ color: "#9ca3af", fontSize: "12px" }}>or</Divider>
+      </div>
+
+      {/* Name Field */}
+      <div>
+        <label
+          htmlFor="name"
+          className="block text-xs font-medium text-gray-700 mb-1"
+        >
+          Name<span className="text-red-500">*</span>
+        </label>
+        <TextField
+          id="name"
+          type="text"
+          placeholder="Enter your name"
+          value={formData.name}
+          onChange={handleChange("name")}
+          fullWidth
+          required
+          variant="outlined"
+          size="small"
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "10px",
+              backgroundColor: "#f9fafb",
+              "& fieldset": {
+                borderColor: "#e5e7eb",
+              },
+              "&:hover fieldset": {
+                borderColor: "#d1d5db",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#6366f1",
+              },
+            },
+            "& .MuiInputBase-input": {
+              padding: "10px 12px",
+              fontSize: "14px",
+            },
+          }}
+        />
       </div>
 
       {/* Email Field */}
@@ -187,30 +221,6 @@ const LoginForm = () => {
         />
       </div>
 
-      {/* Remember & Forgot Link */}
-      <div className="flex justify-between items-center pt-1">
-        <label className="inline-flex items-center text-sm cursor-pointer">
-          <Checkbox
-            sx={{
-              color: "#7C3AED",
-              "&.Mui-checked": {
-                color: "#7C3AED",
-              },
-              padding: "4px",
-            }}
-          />
-          <span className="ml-1 text-gray-600">Remember</span>
-        </label>
-
-        <button
-          type="button"
-          className="text-indigo-600 hover:text-indigo-500 font-medium text-sm cursor-pointer"
-          onClick={() => router.push("/auth/forgot")}
-        >
-          Forgotten?
-        </button>
-      </div>
-
       {/* Submit Button */}
       <div className="pt-2">
         <Button
@@ -233,23 +243,23 @@ const LoginForm = () => {
             },
           }}
         >
-          Login Account
+          Create Account
         </Button>
       </div>
 
-      {/* Register Link */}
+      {/* Login Link */}
       <div className="text-center pt-1">
-        <span className="text-gray-600 text-sm">Don't have an account? </span>
+        <span className="text-gray-600 text-sm">Already have an account? </span>
         <button
           type="button"
           className="text-indigo-600 hover:text-indigo-500 font-medium text-sm cursor-pointer"
-          onClick={() => router.push("/auth/register")}
+          onClick={() => router.push("/auth/login")}
         >
-          Register Here
+          Login Here
         </button>
       </div>
     </form>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

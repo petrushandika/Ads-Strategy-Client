@@ -7,27 +7,24 @@ import {
   Checkbox,
   InputAdornment,
 } from "@mui/material";
-import { Google, Visibility, VisibilityOff } from "@mui/icons-material";
-import { useRouter } from "next/navigation";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-interface LoginFormData {
-  name: string;
-  email: string;
+interface ResetFormData {
   password: string;
+  confirmPassword: string;
 }
 
-const LoginForm = () => {
-  const router = useRouter();
-  const [formData, setFormData] = useState<LoginFormData>({
-    name: "",
-    email: "",
+const ResetForm = () => {
+  const [formData, setFormData] = useState<ResetFormData>({
     password: "",
+    confirmPassword: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange =
-    (field: keyof LoginFormData) =>
+    (field: keyof ResetFormData) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setFormData((prev) => ({
         ...prev,
@@ -41,91 +38,16 @@ const LoginForm = () => {
     // Handle form submission logic here
   };
 
-  const handleGoogleSignIn = () => {
-    console.log("Google sign in clicked");
-    // Handle Google sign in logic here
-  };
-
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
 
+  const handleClickShowConfirmPassword = () => {
+    setShowConfirmPassword((prev) => !prev);
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Google Sign In Button */}
-      <Button
-        variant="outlined"
-        fullWidth
-        onClick={handleGoogleSignIn}
-        startIcon={
-          <Google
-            sx={{
-              color: "#DB4437",
-            }}
-          />
-        }
-        sx={{
-          py: 1,
-          borderColor: "#e5e7eb",
-          borderRadius: "10px",
-          color: "#374151",
-          textTransform: "none",
-          fontSize: "14px",
-          fontWeight: 500,
-          "&:hover": {
-            borderColor: "#d1d5db",
-            backgroundColor: "#f9fafb",
-          },
-        }}
-      >
-        Sign in with Google
-      </Button>
-
-      {/* Divider */}
-      <div className="relative pt-2">
-        <Divider sx={{ color: "#9ca3af", fontSize: "12px" }}>or</Divider>
-      </div>
-
-      {/* Email Field */}
-      <div>
-        <label
-          htmlFor="email"
-          className="block text-xs font-medium text-gray-700 mb-1"
-        >
-          Email<span className="text-red-500">*</span>
-        </label>
-        <TextField
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-          value={formData.email}
-          onChange={handleChange("email")}
-          fullWidth
-          required
-          variant="outlined"
-          size="small"
-          sx={{
-            "& .MuiOutlinedInput-root": {
-              borderRadius: "10px",
-              backgroundColor: "#f9fafb",
-              "& fieldset": {
-                borderColor: "#e5e7eb",
-              },
-              "&:hover fieldset": {
-                borderColor: "#d1d5db",
-              },
-              "&.Mui-focused fieldset": {
-                borderColor: "#6366f1",
-              },
-            },
-            "& .MuiInputBase-input": {
-              padding: "10px 12px",
-              fontSize: "14px",
-            },
-          }}
-        />
-      </div>
-
       {/* Password Field with Toggle */}
       <div>
         <label
@@ -137,7 +59,7 @@ const LoginForm = () => {
         <TextField
           id="password"
           type={showPassword ? "text" : "password"}
-          placeholder="Enter your password"
+          placeholder="Enter your new password"
           value={formData.password}
           onChange={handleChange("password")}
           fullWidth
@@ -187,28 +109,65 @@ const LoginForm = () => {
         />
       </div>
 
-      {/* Remember & Forgot Link */}
-      <div className="flex justify-between items-center pt-1">
-        <label className="inline-flex items-center text-sm cursor-pointer">
-          <Checkbox
-            sx={{
-              color: "#7C3AED",
-              "&.Mui-checked": {
-                color: "#7C3AED",
-              },
-              padding: "4px",
-            }}
-          />
-          <span className="ml-1 text-gray-600">Remember</span>
-        </label>
-
-        <button
-          type="button"
-          className="text-indigo-600 hover:text-indigo-500 font-medium text-sm cursor-pointer"
-          onClick={() => router.push("/auth/forgot")}
+      {/* Confirm Password Field with Toggle */}
+      <div>
+        <label
+          htmlFor="password"
+          className="block text-xs font-medium text-gray-700 mb-1"
         >
-          Forgotten?
-        </button>
+          Confirm Password<span className="text-red-500">*</span>
+        </label>
+        <TextField
+          id="confirm-password"
+          type={showConfirmPassword ? "text" : "password"}
+          placeholder="Confirm your new password"
+          value={formData.confirmPassword}
+          onChange={handleChange("confirmPassword")}
+          fullWidth
+          required
+          variant="outlined"
+          size="small"
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "10px",
+              backgroundColor: "#f9fafb",
+              "& fieldset": {
+                borderColor: "#e5e7eb",
+              },
+              "&:hover fieldset": {
+                borderColor: "#d1d5db",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#6366f1",
+              },
+            },
+            "& .MuiInputBase-input": {
+              padding: "10px 12px",
+              fontSize: "14px",
+              paddingRight: "40px", // space for icon
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              paddingRight: "40px",
+            },
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <button
+                  type="button"
+                  onClick={handleClickShowConfirmPassword}
+                  className="text-gray-500 hover:text-gray-700 focus:outline-none"
+                >
+                  {showConfirmPassword ? (
+                    <VisibilityOff sx={{ fontSize: "18px" }} />
+                  ) : (
+                    <Visibility sx={{ fontSize: "18px" }} />
+                  )}
+                </button>
+              </InputAdornment>
+            ),
+          }}
+        />
       </div>
 
       {/* Submit Button */}
@@ -233,23 +192,11 @@ const LoginForm = () => {
             },
           }}
         >
-          Login Account
+          Reset Password
         </Button>
-      </div>
-
-      {/* Register Link */}
-      <div className="text-center pt-1">
-        <span className="text-gray-600 text-sm">Don't have an account? </span>
-        <button
-          type="button"
-          className="text-indigo-600 hover:text-indigo-500 font-medium text-sm cursor-pointer"
-          onClick={() => router.push("/auth/register")}
-        >
-          Register Here
-        </button>
       </div>
     </form>
   );
 };
 
-export default LoginForm;
+export default ResetForm;
