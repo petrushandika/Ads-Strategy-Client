@@ -48,7 +48,7 @@ const cardData: DashboardCardProps[] = [
   },
 ];
 
-const Dashboard: React.FC = () => {
+const Dashboard = () => {
   return (
     <div className="flex flex-col gap-5 mb-20">
       <h1 className="text-black text-xl font-semibold">Dashboard</h1>
