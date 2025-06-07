@@ -26,7 +26,7 @@ const MetricCard: React.FC<MetricCardProps> = ({
   icon,
   color,
 }) => (
-  <div className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-5 flex flex-col gap-3 border border-gray-100">
+  <div className="bg-white rounded-2xl shadow-xs hover:shadow-sm transition-shadow p-5 flex flex-col gap-3 border border-gray-200">
     <div className="flex items-center justify-between">
       <div>
         <h3 className="text-sm text-gray-500 font-medium">{title}</h3>

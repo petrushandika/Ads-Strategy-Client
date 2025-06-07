@@ -290,7 +290,7 @@ const ChartActivity: React.FC = () => {
           value={timePeriod}
           onChange={handleTimePeriodChange}
           displayEmpty
-          className="text-sm border-none hover:border-none rounded-lg"
+          className="text-sm border-none hover:border-none rounded-lg h-10"
         >
           <MenuItem value="day">Per Day</MenuItem>
           <MenuItem value="week">Per Week</MenuItem>

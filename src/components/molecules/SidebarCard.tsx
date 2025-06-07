@@ -37,7 +37,7 @@ const SidebarCard: React.FC = () => {
   const maxItems = 3;
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-6 w-full border border-gray-100">
+    <div className="bg-white rounded-2xl shadow-xs p-6 w-full border border-gray-200">
       <h3 className="text-base font-bold text-gray-800 mb-5">
         Klinik & Produk Terbaik
       </h3>
