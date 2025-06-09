@@ -3,17 +3,14 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import Loading from "@/components/atoms/Loading";
 
 interface RouteGuardProps {
   children: React.ReactNode;
 }
 
 // Loading component
-const LoadingSpinner = () => (
-  <div className="min-h-screen flex items-center justify-center bg-white">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500"></div>
-  </div>
-);
+const LoadingSpinner = () => <Loading />;
 
 // Private Route - requires authentication
 export const PrivateRoute = ({ children }: RouteGuardProps) => {
@@ -27,7 +24,7 @@ export const PrivateRoute = ({ children }: RouteGuardProps) => {
 
   useEffect(() => {
     if (isClient && !isLoading && !isAuthenticated) {
-      router.replace("/login");
+      router.replace("/auth/login");
     }
   }, [isAuthenticated, isLoading, router, isClient]);
 

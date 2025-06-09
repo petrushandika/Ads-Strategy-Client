@@ -1,16 +1,20 @@
 "use client";
 
+import { usePathname } from "next/navigation";
+import { AuthProvider } from "@/context/AuthContext";
 import Image from "next/image";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { Sidebar } from "@/components/organisms/Sidebar";
-import { AuthProvider, useAuth } from "@/context/AuthContext";
+import { useAuth } from "@/context/AuthContext";
 import { Menu, MenuItem, ListItemIcon, ListItemText } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LockIcon from "@mui/icons-material/Lock";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import React, { useState } from "react";
+import { PrivateRoute, PublicRoute } from "@/components/guards/RouteGuards";
+import Logo from "@/components/atoms/Logo";
 
 function BaseLayout({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
@@ -35,17 +39,7 @@ function BaseLayout({ children }: { children: React.ReactNode }) {
       {/* Top Bar */}
       <header className="flex items-center justify-between px-5 py-4 border-b border-purple-300 bg-white z-10">
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <div className="bg-purple-500 text-white font-bold px-2 py-1 rounded text-lg">
-            Ads
-          </div>
-          <div className="flex flex-col leading-tight">
-            <span className="text-base font-semibold text-gray-900">
-              Strategy
-            </span>
-            <span className="text-xs text-gray-500">Systems</span>
-          </div>
-        </div>
+        <Logo />
 
         {/* Search and Profile */}
         <div className="flex items-center gap-4">
@@ -162,12 +156,36 @@ function BaseLayout({ children }: { children: React.ReactNode }) {
   );
 }
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+// Main GuardLayout component
+const GuardLayout = ({ children }: { children: React.ReactNode }) => {
+  const pathname = usePathname();
+
+  // Routes that should NOT use DashboardLayout (PublicRoute)
+  const publicRoutes = [
+    "/auth/login",
+    "/auth/register",
+    "/auth/reset",
+    "/auth/forgot",
+  ];
+
+  const isPublicRoute = publicRoutes.includes(pathname);
+
+  if (isPublicRoute) {
+    return (
+      <AuthProvider>
+        <PublicRoute>{children}</PublicRoute>
+      </AuthProvider>
+    );
+  }
+
+  // For all other routes (PrivateRoute) - use full DashboardLayout with protection
   return (
     <AuthProvider>
-      <BaseLayout>{children}</BaseLayout>
+      <PrivateRoute>
+        <BaseLayout>{children}</BaseLayout>
+      </PrivateRoute>
     </AuthProvider>
   );
 };
 
-export default DashboardLayout;
+export default GuardLayout;
